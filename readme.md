@@ -5,7 +5,7 @@ Kubernete: Minikube v0.26.0 <br>
 
 ## Install guidance
 #### Install Virtual box:
-    https://www.virtualbox.org/wiki/Downloads
+https://www.virtualbox.org/wiki/Downloads
 
 #### Install Kubectl:
 ```
@@ -87,5 +87,21 @@ $ kubectl get pods -n fission-function
 $ kubectl get svc -n fission
 ```
 
+## Useful docker command line:
+#### Stop all docker container
+```
+$ docker stop (docker ps -aq)
+```
+
+#### Remove all docker container
+```
+$ docker rmi (docker images -aq)
+```
+
+## Other useful command line:
+#### Check port usage
+```
+$ sudo lsof -i:80
+```
 
 ## Future Work
