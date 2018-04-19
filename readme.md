@@ -37,8 +37,6 @@ $ fission route create --method GET --url /hello --function hello
 $ fission function test --name hello
 ```
 
-## Useful command line to check fission status
-
 
 
 ## Pipeline 
@@ -46,5 +44,33 @@ $ fission function test --name hello
 ## Scheduler and workflow 
 
 ## Scripts
+Some workflow to improve efficiency. 
+
+## Useful kubenetes command line:
+#### Check namesapces
+```
+$ kubectl get namespaces
+```
+
+#### Chcek kubernete system management
+```
+$ kubectl get pods -n kube-system
+```
+
+#### Check helm deploy
+```
+$ helm list
+```
+
+#### Check fission function deploy
+```
+$ kubectl get pods -n fission-function
+``` 
+
+#### Check fission deployment
+```
+$ kubectl get svc -n fission
+```
+
 
 ## Future Work
