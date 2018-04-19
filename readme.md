@@ -1,7 +1,7 @@
 ## Migrate microservice architecture to serverless architecture based on Fission.
-Environment: OS X
-Fission: 0.7.1
-Kubernete: Minikube v0.26.0
+Environment: OS X <br>
+Fission: 0.7.1 <br>
+Kubernete: Minikube v0.26.0 <br>
 
 ## Install guidance
 #### Install Virtual box:
