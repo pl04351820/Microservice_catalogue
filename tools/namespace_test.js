@@ -5,7 +5,7 @@ const rp = require('request-promise-native');
 module.exports = async function (context) {
     try {
         // Blocking http request.
-        const response = await rp(`http://192.168.99.100:30876/fission-function/hello`);
+        const response = await rp(`http://10.104.220.154/fission-function/hello`);
         const condition = JSON.parse(response);
         return {
             status: 200,
