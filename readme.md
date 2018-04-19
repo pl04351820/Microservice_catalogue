@@ -37,14 +37,29 @@ $ fission route create --method GET --url /hello --function hello
 $ fission function test --name hello
 ```
 
-
-
 ## Pipeline 
 
 ## Scheduler and workflow 
 
 ## Scripts
 Some workflow to improve efficiency. 
+
+## Useful fission command line:
+#### list all fission function and route deployment
+```
+$ fission function list
+$ fission route list
+```
+
+#### Test fission function 
+```
+$ fission function test --name <function-name>
+```
+
+#### Check function logs
+```
+$ fission function logs --name <function-name>
+```
 
 ## Useful kubenetes command line:
 #### Check namesapces
