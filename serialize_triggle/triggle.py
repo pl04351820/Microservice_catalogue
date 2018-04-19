@@ -2,6 +2,7 @@
 import requests
 import time
 def main():
+    # The requests will be blocking.
     r = requests.get('http://192.168.99.100:30876/fission-function/frontpage')
     print(r.text)
     if r.text:
