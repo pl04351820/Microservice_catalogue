@@ -1,51 +1,92 @@
-# A -> B -> A -> B -> A -> B
-# A -> A -> A -> B -> B -> B
+# A -> B -> C -> A -> B -> C -> A -> B -> C
+# A -> A -> A -> B -> B -> B -> C -> C -> C
 import os
 import time
-import threading
+import json
+from multiprocessing import Process
 
 def workerA():
     B = []
     start_time = time.time()
     for _ in range(10):
-        os.system("hey -c 10 -n 20 http://192.168.99.100:30876/fission-function/frontpage")
+        os.system("hey -c 10 -n 100 http://192.168.99.100:32608/fission-function/frontpage")
         B.append(time.time()-start_time)
         start_time = time.time()
-    print(B)
+    res ={}
+    res["frontpage_raw"] = B
+    res["frontpage"] = sum(res["frontpage_raw"]) / len(res["frontpage_raw"])
+    with open('parallel.txt', 'w') as outfile:
+        json.dump(B, outfile)
     
 def workerB():
     C = []
     start_time = time.time()
     for _ in range(10):
-        os.system("hey -c 10 -n 20 http://192.168.99.100:30876/fission-function/anotherfrontpage")
+        os.system("hey -c 10 -n 100 http://192.168.99.100:32608/fission-function/sizepage")
         C.append(time.time()-start_time)
         start_time = time.time()
-    print(C)
+    res ={}
+    res["sizepage_raw"] = C
+    res["sizepage"] = sum(res["sizepage_raw"]) / len(res["sizepage_raw"])
+    with open('parallel.txt', 'w') as outfile:
+        json.dump(res, outfile)
+
+def workerC():
+    D = []
+    start_time = time.time()
+    for _ in range(10):
+        os.system("hey -c 10 -n 100 http://192.168.99.100:32608/fission-function/tagpage")
+        D.append(time.time()-start_time)
+        start_time = time.time()
+    res ={}
+    res["tagpage_raw"] = D
+    res["tagpage"] = sum(res["tagpage_raw"]) / len(res["tagpage_raw"])
+    with open('parallel.txt', 'w') as outfile:
+        json.dump(res, outfile)
+    # print(D)
 
 def main():
     start_time = time.time()
-    # serilize with container run 10 times and calculate average number.
-    # A -> A -> A -> B -> B -> B
     A = []
     for _ in range(10):
-        os.system("hey -c 20 -n 200 http://192.168.99.100:30876/fission-function/frontpage")
+        os.system("hey -c 20 -n 200 http://192.168.99.100:32608/fission-function/frontpage")
         A.append(time.time()-start_time)
         start_time = time.time()
 
     for _ in range(10):
-        os.system("hey -c 20 -n 200 http://192.168.99.100:30876/fission-function/anotherfrontpage")
+        os.system("hey -c 20 -n 200 http://192.168.99.100:32608/fission-function/sizepage")
         A.append(time.time()-start_time)
         start_time = time.time()
-    print(A)
+    
+    for _ in range(10):
+        os.system("hey -c 20 -n 200 http://192.168.99.100:32608/fission-function/tagpage")
+        A.append(time.time()-start_time)
+        start_time = time.time()
+
+    # Data aggregate
+    res_serilize = {}
+    res_serilize["frontpage_raw"] = A[0:10]
+    res_serilize["sizepage_raw"] = A[10:20]
+    res_serilize["tagpage_raw"] = A[20:30]
+    res_serilize["frontpage"] = sum(res_serilize["frontpage_raw"]) / len(res_serilize["frontpage_raw"])
+    res_serilize["sizepage"] = sum(res_serilize["sizepage_raw"]) / len(res_serilize["sizepage_raw"])
+    res_serilize["tagpage"] = sum(res_serilize["tagpage_raw"]) / len(res_serilize["tagpage_raw"])
+    
+    with open('serilize.txt', 'w') as outfile:
+        json.dump(res_serilize, outfile)
     
     # Parallel runnning process
-    t = threading.Thread(target=workerA)
+    t = Process(target=workerA)
     t.start()
 
-    d = threading.Thread(target=workerB)
+    d = Process(target=workerB)
     d.start()
+
+    k = Process(target=workerC)
+    k.start()
 
     t.join()
     d.join()
+    t.join()
 
 main()

@@ -30,3 +30,9 @@ This script test if your fission workflow installing correct
 sh hello_workflow.sh
 curl ${FISSION_ROUTER}/fortunewhale
 ```
+
+#### reinstall.sh
+Reinstall your fission
+```
+sudo sh reinstall.sh
+```
