@@ -34,6 +34,7 @@ function make_requests(req_list, count){
 }   
 
 http.createServer(function (req, res) {
+    
     if (req.url.slice(2,9) == "request"){
             count += 1;
             var replay = req.url.slice(10,);
