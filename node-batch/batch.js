@@ -5,8 +5,21 @@ var request = require('request')
 
 // Bash and run request. We need sync-calls to run jobs.
 var exec = require('sync-exec')
+
+// Global state
 var count = 0;
 var rqueue = [];    // Store the requests.
+
+// Add timeout function, 500 ms deleys.
+var timeout;
+
+function settimer(){
+    timeout = setTimeout(flush_request, 500);
+}
+
+function cleartimer(){
+    clearTimeout(timeout);
+}
 
 function sort_requests(request_queue){
     // Request_queue: {"URL": frequency}
@@ -23,6 +36,14 @@ function sort_requests(request_queue){
     return res;
 }
 
+function flush_request(rqueue, count){
+    rqueue = sort_requests(rqueue, count);
+    make_requests(rqueue);
+    rqueue = [];
+    count = 0;
+}
+
+
 function make_requests(req_list, count){
     // Measurement the cost time.
     console.time('test');
@@ -34,22 +55,18 @@ function make_requests(req_list, count){
 }   
 
 http.createServer(function (req, res) {
-    
+    cleartimer();
     if (req.url.slice(2,9) == "request"){
             count += 1;
             var replay = req.url.slice(10,);
             var newurl = 'https://' + replay;
             rqueue.push(newurl);
             if (count == 20) {
-            // 100s requests
-            rqueue = sort_requests(rqueue, count);
-            console.log(rqueue);
-            make_requests(rqueue);
-            rqueue = [];
-            count = 0
+                flush_request(rqueue, count);
         }
     }
     res.writeHead(200, {'Context-Type': 'text/plain'})
     res.end("body");
 
+    settimer();
 }).listen(8082);
