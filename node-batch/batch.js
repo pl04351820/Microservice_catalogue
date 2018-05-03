@@ -9,8 +9,6 @@ var exec = require('sync-exec')
 // Global state
 var count = 0;
 var rqueue = [];    // Store the requests.
-
-// Add timeout function, 500 ms deleys.
 var timeout;
 
 function settimer(){
@@ -24,25 +22,24 @@ function cleartimer(){
 function sort_requests(request_queue){
     // Request_queue: {"URL": frequency}
     request_queue.sort();
-    res = {};
+    var dic = {};
     for(i=0;i < request_queue.length; i++){
-        if (request_queue[i] in res){
-            res[request_queue[i]] += 1;
+        if (request_queue[i] in dic){
+            dic[request_queue[i]] += 1;
         }
         else{
-            res[request_queue[i]] = 1;
+            dic[request_queue[i]] = 1;
         }
     }
-    return res;
+    return dic;
 }
 
-function flush_request(rqueue, count){
-    rqueue = sort_requests(rqueue, count);
-    make_requests(rqueue);
+function flush_request(){
+    dic = sort_requests(rqueue);
+    make_requests(dic, count);
     rqueue = [];
     count = 0;
 }
-
 
 function make_requests(req_list, count){
     // Measurement the cost time.
@@ -62,8 +59,8 @@ http.createServer(function (req, res) {
             var newurl = 'https://' + replay;
             rqueue.push(newurl);
             if (count == 20) {
-                flush_request(rqueue, count);
-        }
+                flush_request();
+            }
     }
     res.writeHead(200, {'Context-Type': 'text/plain'})
     res.end("body");
