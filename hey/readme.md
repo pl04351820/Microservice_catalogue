@@ -1,6 +1,6 @@
 ## Load Tests
 
-<p>fork from github.com/rakyll/hey</p>
+<p>fork from https://www.github.com/rakyll/hey</p>
 
 #### Installation
 ```

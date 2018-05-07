@@ -4,6 +4,7 @@
 [![Microbadger](https://images.microbadger.com/badges/image/weaveworksdemos/catalogue.svg)](http://microbadger.com/images/weaveworksdemos/catalogue "Get your own image badge on microbadger.com")
 
 <!-- Clone from original repo -->
+fork from https://github.com/microservices-demo/catalogue
 # Catalogue
 A microservices-demo service that provides catalogue/product information. 
 This service is built, tested and released by travis.
