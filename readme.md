@@ -104,4 +104,7 @@ $ docker rmi (docker images -aq)
 $ sudo lsof -i:80
 ```
 
-## Future Work
+#### Check cpu usage
+```
+$ top
+```

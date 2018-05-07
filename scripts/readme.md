@@ -9,5 +9,5 @@
 
 Invoke script by 
 ```
-sh <ScriptName>
+$ sh <ScriptName>
 ```
