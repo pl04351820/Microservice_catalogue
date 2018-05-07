@@ -49,7 +49,7 @@ function make_requests(req_list, count){
         exec(cmd);
     }
     console.timeEnd('test');
-}   
+}
 
 http.createServer(function (req, res) {
     cleartimer();

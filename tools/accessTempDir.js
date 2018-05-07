@@ -1,9 +1,5 @@
 var fs = require('fs');
 
-function user(){
-
-}
-
 module.exports = async function(context) {
     fs.writeFile("/tmp/test", "Hey there!", function(err) {
         if(err) {

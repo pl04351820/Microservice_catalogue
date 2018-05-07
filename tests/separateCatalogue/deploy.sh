@@ -1,17 +1,17 @@
 # This will make the fission system crash
 
-# fission env create --name nodefrontpage --image fission/node-env:0.7.0
-# sleep 10s
-# fission env create --name sizepage --image fission/node-env:0.7.0
-# sleep 10s
-# fission env create --name tagpage --image fission/node-env:0.7.0
-# sleep 10s
+fission env create --name nodefrontpage --image fission/node-env:0.7.0
+sleep 10s
+fission env create --name sizepage --image fission/node-env:0.7.0
+sleep 10s
+fission env create --name tagpage --image fission/node-env:0.7.0
+sleep 10s
 
 # Try to make it in the same container. more than 3 containers will make the system crash based on my test.
 
-fission env create --name nodefrontpage --image fission/node-env:0.7.0 
-fission env create --name sizepage --image fission/node-env:0.7.0 --poolsize 2
-fission env create --name tagpage --image fission/node-env:0.7.0 --poolsize 2 
+# fission env create --name nodefrontpage --image fission/node-env:0.7.0 
+# fission env create --name sizepage --image fission/node-env:0.7.0 --poolsize 2
+# fission env create --name tagpage --image fission/node-env:0.7.0 --poolsize 2 
 
 # fission fn create --name hello --code hello.js --env node --minscale 1 --maxscale 5  --executortype newdeploy
 
