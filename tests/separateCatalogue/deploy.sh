@@ -16,13 +16,13 @@ sleep 10s
 # fission fn create --name hello --code hello.js --env node --minscale 1 --maxscale 5  --executortype newdeploy
 
 
-# fission function create --name frontpage --env nodefrontpage --code front-page.js
-# fission function create --name sizepage --env nodesize --code size-page.js
-# fission function create --name tagpage --env nodetag --code tag-page.js
+# fission function create --name frontpage --env nodefrontpage --code front-page.js --maxscale 1
+# fission function create --name sizepage --env nodesize --code size-page.js --maxscale 1
+# fission function create --name tagpage --env nodetag --code tag-page.js --maxscale 1
 
-fission function create --name frontpage --env nodejs --code front-page.js
-fission function create --name sizepage --env nodejs --code size-page.js
-fission function create --name tagpage --env nodejs --code tag-page.js
+fission function create --name frontpage --env nodejs --code front-page.js --maxscale 1
+fission function create --name sizepage --env nodejs --code size-page.js --maxscale 1
+fission function create --name tagpage --env nodejs --code tag-page.js --maxscale 1
 
 
 fission route create --function frontpage --url /frontpage
