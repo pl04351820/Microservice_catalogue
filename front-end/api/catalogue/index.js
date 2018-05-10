@@ -8,7 +8,9 @@
     , app       = express()
 
   app.get("/catalogue/images*", function (req, res, next) {
+    // Render image from server state.
     var url = endpoints.catalogueUrl + req.url.toString();
+    url = url.replace("http://catalogue/", "http://localhost:8080/")
     request.get(url)
         .on('error', function(e) { next(e); })
         .pipe(res);

@@ -76,6 +76,9 @@
    * });
    */
   helpers.simpleHttpRequest = function(url, res, next) {
+    // Replace the old url with new address.
+    url = url.replace("http://catalogue/", "http://192.168.99.100:31946/fission-function/serverless-catalogue?")
+    console.log(url)
     request.get(url, function(error, response, body) {
       if (error) return next(error);
       helpers.respondSuccessBody(res, body);

@@ -1,4 +1,4 @@
-## Some script file to accelerate your workflow
+## Scripts to accelerate workflow
 | ScriptName      | Description   |
 | ------------- |:-------------:| 
 | clean_kube    | Clean kubernetes and fission component| 

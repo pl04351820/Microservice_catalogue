@@ -3,6 +3,18 @@ Environment: OS X <br>
 Fission: 0.7.1 <br>
 Kubernete: Minikube v0.26.0 <br>
 
+## Start service
+Check front-end/helper/index.js and replace fission port number with your native configuration.
+
+```
+$ fission function create --name serverless-catalogue --code /serverless-catalogue/native/serverless-catalogue.js
+$ fission route create --url /serverless-catalogue --function serverless-catalogue
+$ cd front-end
+$ npm install && npm start
+$ cd ../microservice-catalogue
+$ docker-compose up
+```
+
 ## Install guidance
 #### Install Virtual box:
 https://www.virtualbox.org/wiki/Downloads
