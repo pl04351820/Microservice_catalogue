@@ -49,10 +49,6 @@ $ fission route create --method GET --url /hello --function hello
 $ fission function test --name hello
 ```
 
-## Pipeline 
-
-## Scheduler and workflow 
-
 ## Scripts
 Some workflow to improve efficiency. 
 
